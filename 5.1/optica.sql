@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `Optica`.`suppliers` (
   `city` VARCHAR(45),
   `postalCode` VARCHAR(5),
   `country` VARCHAR(45),
-  `telephone` VARCHAR(45),
+  `telephone` VARCHAR(20),
   `fax` VARCHAR(45) NULL,
   PRIMARY KEY (`id_supplier`));
 
