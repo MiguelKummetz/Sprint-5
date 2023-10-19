@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `Pizzeria`.`orders` (
   `store_id` INT NOT NULL,
   `client_id` INT NOT NULL,
   `time` DATETIME NOT NULL,
-  `is_delivery` TINYINT(1) NOT NULL,
+  `is_delivery` TINYINT NOT NULL,
   `total_price` DECIMAL(6,2) NOT NULL,
   `creation_date` DATETIME NOT NULL,
   PRIMARY KEY (`id_orders`, `client_id`, `store_id`),
