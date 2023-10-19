@@ -13,9 +13,12 @@ CREATE TABLE IF NOT EXISTS `Optica`.`suppliers` (
   `country` VARCHAR(45) NULL DEFAULT NULL,
   `telephone` VARCHAR(20) NULL DEFAULT NULL,
   `fax` VARCHAR(45) NULL DEFAULT NULL,
-  PRIMARY KEY (`id_supplier`));
+  PRIMARY KEY (`id_supplier`),
+  UNIQUE INDEX `id_supplier_UNIQUE` (`id_supplier` ASC) VISIBLE,
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE,
+  UNIQUE INDEX `NIF_UNIQUE` (`NIF` ASC) VISIBLE);
   
-  CREATE TABLE IF NOT EXISTS `Optica`.`glasses` (
+CREATE TABLE IF NOT EXISTS `Optica`.`glasses` (
   `id_glasses` INT NOT NULL,
   `supplier_id` INT NOT NULL,
   `brand` VARCHAR(45) NOT NULL,
@@ -27,33 +30,37 @@ CREATE TABLE IF NOT EXISTS `Optica`.`suppliers` (
   `glass_color` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`id_glasses`, `supplier_id`),
   INDEX `id_supplier` (`supplier_id` ASC) VISIBLE,
+  UNIQUE INDEX `id_glasses_UNIQUE` (`id_glasses` ASC) VISIBLE,
   CONSTRAINT `id_supplier`
     FOREIGN KEY (`supplier_id`)
     REFERENCES `Optica`.`suppliers` (`id_supplier`));
     
-    CREATE TABLE IF NOT EXISTS `Optica`.`clients` (
+CREATE TABLE IF NOT EXISTS `Optica`.`clients` (
   `id_client` INT NOT NULL,
   `name` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
   `registration_date` DATE NOT NULL,
   `postal_adress` VARCHAR(120) NULL DEFAULT NULL,
   `telephone` VARCHAR(45) NULL DEFAULT NULL,
-  `email` VARCHAR(45) NULL DEFAULT NULL,
   `recomendation_id` INT NULL DEFAULT NULL,
   PRIMARY KEY (`id_client`),
   INDEX `recomendation_id` (`recomendation_id` ASC) VISIBLE,
+  UNIQUE INDEX `id_client_UNIQUE` (`id_client` ASC) VISIBLE,
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
   CONSTRAINT `recomendation_id`
     FOREIGN KEY (`recomendation_id`)
     REFERENCES `Optica`.`clients` (`id_client`));
     
-    CREATE TABLE IF NOT EXISTS `Optica`.`sales` (
+CREATE TABLE IF NOT EXISTS `Optica`.`sales` (
   `id_sale` INT NOT NULL,
   `client_id` INT NOT NULL,
   `glasses_id` INT NOT NULL,
   `seller` VARCHAR(45) NOT NULL,
-  `time` TIME NOT NULL,
-  PRIMARY KEY (`id_sale`, `client_id`),
+  `time` DATETIME NOT NULL,
+  PRIMARY KEY (`id_sale`, `client_id`, `glasses_id`),
   INDEX `glasses_id_idx` (`glasses_id` ASC) VISIBLE,
   INDEX `client_id_idx` (`client_id` ASC) VISIBLE,
+  UNIQUE INDEX `id_sale_UNIQUE` (`id_sale` ASC) VISIBLE,
   CONSTRAINT `glasses_id`
     FOREIGN KEY (`glasses_id`)
     REFERENCES `Optica`.`glasses` (`id_glasses`)
