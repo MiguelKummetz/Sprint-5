@@ -1,22 +1,35 @@
 USE universidad;
 
 -- 1 Retorna un llistat amb el primer cognom, segon cognom i el nom de tots els/les alumnes. El llistat haurà d'estar ordenat alfabèticament de menor a major pel primer cognom, segon cognom i nom.
-
+SELECT DISTINCT p.apellido1, p.apellido2, p.nombre FROM persona p 
+INNER JOIN alumno_se_matricula_asignatura a ON p.id = a.id_alumno
+ORDER BY p.apellido1, p.apellido2, p.nombre;
 
 -- 2 Esbrina el nom i els dos cognoms dels alumnes que no han donat d'alta el seu número de telèfon en la base de dades.
-
+SELECT DISTINCT p.apellido1, p.apellido2, p.nombre FROM persona p 
+INNER JOIN alumno_se_matricula_asignatura a ON p.id = a.id_alumno
+WHERE p.telefono IS NULL;
 
 -- 3 Retorna el llistat dels alumnes que van néixer en 1999.
-
+SELECT DISTINCT p.apellido1, p.apellido2, p.nombre FROM persona p 
+INNER JOIN alumno_se_matricula_asignatura a ON p.id = a.id_alumno
+WHERE p.fecha_nacimiento LIKE '1999%';
 
 -- 4 Retorna el llistat de professors/es que no han donat d'alta el seu número de telèfon en la base de dades i a més el seu NIF acaba en K.
-
+SELECT DISTINCT p.apellido1, p.apellido2, p.nombre FROM persona p 
+INNER JOIN profesor o ON p.id = o.id_profesor
+WHERE (p.telefono IS NULL) AND (p.nif LIKE '%K');
 
 -- 5 Retorna el llistat de les assignatures que s'imparteixen en el primer quadrimestre, en el tercer curs del grau que té l'identificador 7.
-
+SELECT a.id, a.nombre FROM asignatura a 
+INNER JOIN grado g ON a.id_grado = g.id
+WHERE (a.cuatrimestre = 1) AND (a.curso = 3) AND (g.id = 7);
 
 -- 6 Retorna un llistat dels professors/es juntament amb el nom del departament al qual estan vinculats. El llistat ha de retornar quatre columnes, primer cognom, segon cognom, nom i nom del departament. El resultat estarà ordenat alfabèticament de menor a major pels cognoms i el nom.
-
+SELECT DISTINCT p.apellido1, p.apellido2, p.nombre, d.nombre FROM persona p 
+INNER JOIN profesor o ON p.id = o.id_profesor
+INNER JOIN departamento d ON o.id_departamento = d.id
+ORDER BY p.apellido1, p.apellido2, p.nombre;
 
 -- 7 Retorna un llistat amb el nom de les assignatures, any d'inici i any de fi del curs escolar de l'alumne/a amb NIF 26902806M.
 
