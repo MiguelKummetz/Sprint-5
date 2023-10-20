@@ -26,19 +26,30 @@ INNER JOIN grado g ON a.id_grado = g.id
 WHERE (a.cuatrimestre = 1) AND (a.curso = 3) AND (g.id = 7);
 
 -- 6 Retorna un llistat dels professors/es juntament amb el nom del departament al qual estan vinculats. El llistat ha de retornar quatre columnes, primer cognom, segon cognom, nom i nom del departament. El resultat estarà ordenat alfabèticament de menor a major pels cognoms i el nom.
-SELECT DISTINCT p.apellido1, p.apellido2, p.nombre, d.nombre FROM persona p 
+SELECT p.apellido1, p.apellido2, p.nombre, d.nombre FROM persona p 
 INNER JOIN profesor o ON p.id = o.id_profesor
 INNER JOIN departamento d ON o.id_departamento = d.id
 ORDER BY p.apellido1, p.apellido2, p.nombre;
 
 -- 7 Retorna un llistat amb el nom de les assignatures, any d'inici i any de fi del curs escolar de l'alumne/a amb NIF 26902806M.
-
+SELECT a.nombre, c.anyo_inicio, c.anyo_fin FROM alumno_se_matricula_asignatura m
+INNER JOIN persona p ON m.id_alumno = p.id
+INNER JOIN asignatura a ON m.id_asignatura = a.id
+INNER JOIN curso_escolar c ON m.id_curso_escolar = c.id
+WHERE p.nif = '26902806M';
 
 -- 8 Retorna un llistat amb el nom de tots els departaments que tenen professors/es que imparteixen alguna assignatura en el Grau en Enginyeria Informàtica (Pla 2015).
-
+SELECT DISTINCT d.nombre FROM departamento d
+INNER JOIN profesor p ON d.id = p.id_departamento
+INNER JOIN asignatura a ON p.id_profesor = a.id_profesor
+INNER JOIN grado g ON g.id = a.id_grado
+WHERE g.nombre = 'Grado en Ingeniería Informática (Plan 2015)';
 
 -- 9 Retorna un llistat amb tots els alumnes que s'han matriculat en alguna assignatura durant el curs escolar 2018/2019.
-
+SELECT DISTINCT p.apellido1, p.apellido2, p.nombre FROM persona p
+INNER JOIN alumno_se_matricula_asignatura m ON p.id = m.id_alumno
+INNER JOIN curso_escolar c ON m.id_curso_escolar = c.id
+WHERE c.anyo_inicio = 2018;
 
 --------------------
 -- Resol les 6 següents consultes utilitzant les clàusules LEFT JOIN i RIGHT JOIN.
