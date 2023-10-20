@@ -1,19 +1,17 @@
 USE universidad;
 
 -- 1 Retorna un llistat amb el primer cognom, segon cognom i el nom de tots els/les alumnes. El llistat haurà d'estar ordenat alfabèticament de menor a major pel primer cognom, segon cognom i nom.
-SELECT DISTINCT p.apellido1, p.apellido2, p.nombre FROM persona p 
-INNER JOIN alumno_se_matricula_asignatura a ON p.id = a.id_alumno
-ORDER BY p.apellido1, p.apellido2, p.nombre;
+SELECT DISTINCT apellido1, apellido2, nombre FROM persona
+WHERE tipo = 'alumno'
+ORDER BY apellido1, apellido2, nombre;
 
 -- 2 Esbrina el nom i els dos cognoms dels alumnes que no han donat d'alta el seu número de telèfon en la base de dades.
-SELECT DISTINCT p.apellido1, p.apellido2, p.nombre FROM persona p 
-INNER JOIN alumno_se_matricula_asignatura a ON p.id = a.id_alumno
-WHERE p.telefono IS NULL;
+SELECT DISTINCT apellido1, apellido2, nombre FROM persona
+WHERE tipo = 'alumno' AND telefono IS NULL;
 
 -- 3 Retorna el llistat dels alumnes que van néixer en 1999.
-SELECT DISTINCT p.apellido1, p.apellido2, p.nombre FROM persona p 
-INNER JOIN alumno_se_matricula_asignatura a ON p.id = a.id_alumno
-WHERE p.fecha_nacimiento LIKE '1999%';
+SELECT DISTINCT apellido1, apellido2, nombre FROM persona
+WHERE fecha_nacimiento LIKE '1999%' AND tipo = 'alumno';
 
 -- 4 Retorna el llistat de professors/es que no han donat d'alta el seu número de telèfon en la base de dades i a més el seu NIF acaba en K.
 SELECT DISTINCT p.apellido1, p.apellido2, p.nombre FROM persona p 
@@ -101,12 +99,12 @@ WHERE a.curso IS NULL
 -- Consultes resum:
 
 -- 1 Retorna el nombre total d'alumnes que hi ha.
-SELECT COUNT(DISTINCT a.id_alumno) AS 'numero de alumnos' FROM alumno_se_matricula_asignatura a;
+SELECT COUNT(id) AS 'numero de alumnos' FROM persona
+WHERE tipo = 'alumno';
 
 -- 2 Calcula quants alumnes van néixer en 1999.
-SELECT COUNT(DISTINCT a.id_alumno) AS 'numero de alumnos nacidos en 1999' FROM alumno_se_matricula_asignatura a
-INNER JOIN persona p ON a.id_alumno = p.id
-WHERE p.fecha_nacimiento LIKE '1999%';
+SELECT COUNT(id) AS 'numero de alumnos nacidos en 1999' FROM persona
+WHERE tipo = 'alumno' AND fecha_nacimiento LIKE '1999%';
 
 -- 3 Calcula quants professors/es hi ha en cada departament. El resultat només ha de mostrar dues columnes, una amb el nom del departament i una altra amb el nombre de professors/es que hi ha en aquest departament. El resultat només ha d'incloure els departaments que tenen professors/es associats i haurà d'estar ordenat de major a menor pel nombre de professors/es.
 SELECT d.nombre AS 'nombre del departamento',
