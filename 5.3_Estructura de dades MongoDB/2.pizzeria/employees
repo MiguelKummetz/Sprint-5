@@ -1,0 +1,9 @@
+const Employees = new Schema({
+    _id: ObjectId,
+    name: String,
+    surname: String,
+    telephone: String,
+    nif: String,
+    occupation: String,
+    store: String
+  })
