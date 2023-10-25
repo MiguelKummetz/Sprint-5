@@ -1,5 +1,5 @@
 const Employees = new Schema({
-    _id: ObjectId,
+    employee_id: ObjectId,
     name: String,
     surname: String,
     telephone: String,

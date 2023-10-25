@@ -1,5 +1,5 @@
 const Clients = new Schema({
-    _id: ObjectId,
+    client_id: ObjectId,
     name: String,
     surname: String,
     telephone: String,
@@ -13,7 +13,7 @@ const Clients = new Schema({
         province: String,
     },
     orders: {
-        _id: ObjectId,
+        order_id: ObjectId,
         type: String,
         time: Date,
         items: [{

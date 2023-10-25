@@ -1,5 +1,5 @@
 const Stores = new Schema({
-    _id: ObjectId,
+    store_id: ObjectId,
     name: String,
     telephone: String,
     address: {

@@ -1,5 +1,5 @@
-const Glasses = new Schema({
-    _id: ObjectId,
+const Items = new Schema({
+    item_id: ObjectId,
     supplier: String,
     brand: String,
     price: Number,

@@ -1,8 +1,8 @@
 const Items = new Schema({
-    _id: ObjectId,
+    item_id: ObjectId,
     category: String,
     pizza_category: {
-        _id: ObjectId,
+        category_id: ObjectId,
         name: String,
     },
     name: String,

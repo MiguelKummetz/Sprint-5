@@ -1,5 +1,5 @@
-const Supplier = new Schema({
-    id: ObjectId,
+const Suppliers = new Schema({
+    supplier_id: ObjectId,
     name: String,
     nif: String,
     address: {

@@ -1,15 +1,15 @@
-const Client = new Schema({
-  _id: ObjectId,
+const Clients = new Schema({
+  client_id: ObjectId,
   name: String,
   email: String,
   registration_date: Date,
   postal_adress: String,
   telephone: [String],
-  recomendation_id: ObjectId,
+  recomendation: client_id,
   orders: {
-    _id: ObjectId,
+    order_id: ObjectId,
     items: [{
-      _id: ObjectId,
+      item_id: ObjectId,
       supplier: String,
       brand: String,
       price: Number,
